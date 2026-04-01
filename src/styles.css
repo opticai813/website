@@ -159,11 +159,24 @@ pre {
   color: #fff;
   font-weight: 700;
   box-shadow: 0 0 30px rgba(83, 215, 255, 0.22);
+  overflow: hidden;
 }
 
 .theme-embodied .brand-mark {
   background: linear-gradient(135deg, rgba(255, 155, 74, 0.92), rgba(240, 200, 139, 0.88));
   box-shadow: 0 0 30px rgba(240, 200, 139, 0.18);
+}
+
+.brand-mark-image-wrap {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+
+.brand-mark-image {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  display: block;
 }
 
 .brand-text {

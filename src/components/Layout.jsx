@@ -172,7 +172,18 @@ export function AppShell({ theme = "optic", nav, children }) {
       <header className="site-header">
         <div className="site-header-inner">
           <NavLink className="brand" to={theme === "optic" ? "/" : "/embodied-labs"}>
-            <span className="brand-mark">{theme === "optic" ? "O" : "E"}</span>
+            <span className={`brand-mark ${theme === "optic" ? "brand-mark-image-wrap" : ""}`}>
+              {theme === "optic" ? (
+                <img
+                  className="brand-mark-image"
+                  src="/assets/optic-wolf-mark.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              ) : (
+                "E"
+              )}
+            </span>
             <span className="brand-text">
               <strong>{theme === "optic" ? "OPTIC" : "EMBODIED LABS"}</strong>
               <span>
