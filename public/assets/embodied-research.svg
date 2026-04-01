@@ -1,0 +1,31 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#080707"/>
+  <g opacity="0.45">
+    <circle cx="800" cy="500" r="260" fill="url(#a)"/>
+    <circle cx="800" cy="500" r="360" stroke="#F0C88B" stroke-opacity="0.22"/>
+    <circle cx="800" cy="500" r="190" stroke="#FF9B4A" stroke-opacity="0.3"/>
+  </g>
+  <g opacity="0.24" stroke="#F0C88B">
+    <path d="M130 850L460 670L820 760L1140 470L1450 550"/>
+    <path d="M120 290L410 350L770 240L1090 300L1410 200"/>
+    <path d="M250 200L520 520L820 420L1120 720L1380 640"/>
+  </g>
+  <g opacity="0.7" font-family="monospace" font-size="30" fill="#F5DFC1">
+    <text x="650" y="470">EMBODIED LABS</text>
+    <text x="608" y="518">FRONTIER RESEARCH</text>
+    <text x="644" y="566">TRANSFER ENGINE</text>
+  </g>
+  <g fill="#F0C88B">
+    <circle cx="410" cy="350" r="5"/>
+    <circle cx="770" cy="240" r="5"/>
+    <circle cx="1090" cy="300" r="5"/>
+    <circle cx="520" cy="520" r="5"/>
+    <circle cx="1120" cy="720" r="5"/>
+  </g>
+  <defs>
+    <radialGradient id="a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(800 500) rotate(90) scale(260)">
+      <stop stop-color="#FF9B4A" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#FF9B4A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

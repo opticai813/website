@@ -1,0 +1,15 @@
+{
+  "name": "Optic.ai / Embodied Labs",
+  "short_name": "Optic",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#05070a",
+  "theme_color": "#071019",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

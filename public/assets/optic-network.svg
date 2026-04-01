@@ -1,0 +1,54 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#05080C"/>
+  <g opacity="0.55">
+    <circle cx="244" cy="180" r="220" fill="url(#a)"/>
+    <circle cx="1300" cy="150" r="180" fill="url(#b)"/>
+    <circle cx="1180" cy="760" r="220" fill="url(#c)"/>
+  </g>
+  <g opacity="0.18" stroke="#53D7FF">
+    <path d="M110 820L440 590L815 650L1120 400L1440 500"/>
+    <path d="M130 330L360 380L650 240L980 290L1340 180"/>
+    <path d="M260 170L520 510L850 420L1140 720L1410 650"/>
+  </g>
+  <g opacity="0.28" stroke="#1C6CFF">
+    <path d="M250 200H530V390H250Z"/>
+    <path d="M650 300H930V560H650Z"/>
+    <path d="M1075 210H1325V440H1075Z"/>
+    <path d="M990 620H1270V830H990Z"/>
+  </g>
+  <g fill="#DDF7FF">
+    <circle cx="250" cy="200" r="4"/>
+    <circle cx="530" cy="390" r="4"/>
+    <circle cx="650" cy="300" r="4"/>
+    <circle cx="930" cy="560" r="4"/>
+    <circle cx="1080" cy="210" r="4"/>
+    <circle cx="1325" cy="440" r="4"/>
+    <circle cx="1120" cy="720" r="4"/>
+    <circle cx="1420" cy="650" r="4"/>
+  </g>
+  <g opacity="0.9" font-family="monospace" font-size="28" fill="#DDF7FF">
+    <text x="270" y="234">SENSOR INGESTION</text>
+    <text x="670" y="334">FUSION ENGINE</text>
+    <text x="1095" y="244">PERCEPTION</text>
+    <text x="1015" y="655">EDGE RUNTIME</text>
+  </g>
+  <g opacity="0.4">
+    <path d="M70 920H1530" stroke="#53D7FF" stroke-dasharray="10 14"/>
+    <path d="M120 120V900" stroke="#1C6CFF" stroke-dasharray="8 12"/>
+    <path d="M1480 120V900" stroke="#1C6CFF" stroke-dasharray="8 12"/>
+  </g>
+  <defs>
+    <radialGradient id="a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(244 180) rotate(90) scale(220)">
+      <stop stop-color="#1C6CFF" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#1C6CFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1300 150) rotate(90) scale(180)">
+      <stop stop-color="#53D7FF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#53D7FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="c" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1180 760) rotate(90) scale(220)">
+      <stop stop-color="#53D7FF" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#53D7FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

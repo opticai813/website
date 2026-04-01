@@ -1,0 +1,51 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" rx="32" fill="#05080C"/>
+  <rect x="72" y="72" width="1456" height="856" rx="28" stroke="#1A2634"/>
+  <rect x="110" y="118" width="1380" height="92" rx="18" fill="#09111A"/>
+  <rect x="118" y="126" width="248" height="76" rx="14" stroke="#53D7FF" stroke-opacity="0.25"/>
+  <rect x="396" y="126" width="246" height="76" rx="14" stroke="#53D7FF" stroke-opacity="0.14"/>
+  <rect x="672" y="126" width="246" height="76" rx="14" stroke="#53D7FF" stroke-opacity="0.14"/>
+  <rect x="948" y="126" width="246" height="76" rx="14" stroke="#53D7FF" stroke-opacity="0.14"/>
+  <rect x="1224" y="126" width="258" height="76" rx="14" stroke="#53D7FF" stroke-opacity="0.25"/>
+  <rect x="110" y="242" width="770" height="450" rx="24" fill="#071019"/>
+  <rect x="910" y="242" width="580" height="264" rx="24" fill="#071019"/>
+  <rect x="910" y="536" width="580" height="156" rx="24" fill="#071019"/>
+  <rect x="110" y="722" width="1380" height="170" rx="24" fill="#071019"/>
+  <g opacity="0.2">
+    <path d="M140 276H850V662H140Z" stroke="#53D7FF"/>
+    <path d="M940 272H1460V474H940Z" stroke="#53D7FF"/>
+    <path d="M940 566H1460V662H940Z" stroke="#53D7FF"/>
+  </g>
+  <g opacity="0.22" stroke="#53D7FF">
+    <path d="M168 328H822"/>
+    <path d="M168 398H822"/>
+    <path d="M168 468H822"/>
+    <path d="M168 538H822"/>
+    <path d="M168 608H822"/>
+    <path d="M220 294V640"/>
+    <path d="M344 294V640"/>
+    <path d="M468 294V640"/>
+    <path d="M592 294V640"/>
+    <path d="M716 294V640"/>
+  </g>
+  <g opacity="0.85">
+    <rect x="250" y="342" width="118" height="162" stroke="#53D7FF" stroke-width="2"/>
+    <rect x="580" y="420" width="144" height="118" stroke="#53D7FF" stroke-width="2"/>
+    <rect x="410" y="300" width="92" height="134" stroke="#53D7FF" stroke-width="2"/>
+    <circle cx="1186" cy="374" r="92" stroke="#1C6CFF" stroke-width="2"/>
+    <circle cx="1186" cy="374" r="58" stroke="#53D7FF" stroke-width="2" stroke-dasharray="7 9"/>
+  </g>
+  <g font-family="monospace" fill="#DDF7FF" font-size="28">
+    <text x="144" y="173">MISSION CONTROL / ACTIVE</text>
+    <text x="142" y="767">PERCEPTION STREAMS / SCENE GRAPH / DEPLOYMENTS</text>
+    <text x="948" y="292">TRACKING / TELEMETRY</text>
+  </g>
+  <g opacity="0.5" fill="#53D7FF">
+    <circle cx="260" cy="774" r="6"/>
+    <circle cx="432" cy="774" r="6"/>
+    <circle cx="604" cy="774" r="6"/>
+    <circle cx="776" cy="774" r="6"/>
+    <circle cx="948" cy="774" r="6"/>
+    <circle cx="1120" cy="774" r="6"/>
+  </g>
+</svg>
