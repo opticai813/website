@@ -1,23 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-function BrandSwitch() {
+function BrandSwitch({ className = "", onNavigate }) {
   const location = useLocation();
   const inEmbodied = location.pathname.startsWith("/embodied-labs");
 
   return (
-    <div className="brand-switch">
-      <NavLink className={!inEmbodied ? "active" : ""} to="/">
+    <div className={`brand-switch ${className}`.trim()}>
+      <NavLink className={!inEmbodied ? "active" : ""} onClick={onNavigate} to="/">
         Optic
       </NavLink>
-      <NavLink className={inEmbodied ? "active" : ""} to="/embodied-labs">
+      <NavLink
+        className={inEmbodied ? "active" : ""}
+        onClick={onNavigate}
+        to="/embodied-labs"
+      >
         Embodied Labs
       </NavLink>
     </div>
   );
 }
 
-function NavigationMenu({ nav }) {
+function NavigationMenu({ nav, mobile = false, onNavigate }) {
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
   const navRef = useRef(null);
@@ -27,7 +31,7 @@ function NavigationMenu({ nav }) {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (!openMenu) return undefined;
+    if (!openMenu || mobile) return undefined;
 
     const handlePointerDown = (event) => {
       if (!navRef.current?.contains(event.target)) {
@@ -37,18 +41,29 @@ function NavigationMenu({ nav }) {
 
     document.addEventListener("mousedown", handlePointerDown);
     return () => document.removeEventListener("mousedown", handlePointerDown);
-  }, [openMenu]);
+  }, [mobile, openMenu]);
 
   return (
-    <nav className="site-nav" aria-label="Primary" ref={navRef}>
+    <nav
+      className={mobile ? "mobile-nav" : "site-nav"}
+      aria-label={mobile ? "Mobile primary" : "Primary"}
+      ref={navRef}
+    >
       {nav.map((item) => {
-        const displayMark = item.label === "PIE" ? "π" : item.mark;
+        const displayMark = item.label === "PIE" ? "\u03C0" : item.mark;
 
         if (!item.items) {
           return (
             <NavLink
               key={item.to}
-              className={({ isActive }) => (isActive ? "active" : "")}
+              className={({ isActive }) =>
+                mobile
+                  ? `mobile-nav-link ${isActive ? "active" : ""}`.trim()
+                  : isActive
+                    ? "active"
+                    : ""
+              }
+              onClick={onNavigate}
               to={item.to}
             >
               {item.label}
@@ -58,6 +73,51 @@ function NavigationMenu({ nav }) {
 
         const active = item.items.some((child) => location.pathname === child.to);
         const open = openMenu === item.label;
+
+        if (mobile) {
+          return (
+            <div
+              className={`mobile-nav-group ${active ? "active" : ""} ${open ? "open" : ""}`}
+              key={item.label}
+            >
+              <button
+                className="mobile-nav-trigger"
+                type="button"
+                aria-expanded={open}
+                onClick={() =>
+                  setOpenMenu((current) => (current === item.label ? null : item.label))
+                }
+              >
+                <span className="mobile-nav-trigger-label">
+                  <span>{item.label}</span>
+                  {displayMark ? (
+                    <span className="nav-menu-trigger-mark" aria-hidden="true">
+                      {displayMark}
+                    </span>
+                  ) : null}
+                </span>
+                <span className="mobile-nav-trigger-icon" aria-hidden="true">
+                  {open ? "−" : "+"}
+                </span>
+              </button>
+              <div className="mobile-nav-panel">
+                {item.items.map((child) => (
+                  <NavLink
+                    key={child.to}
+                    className={({ isActive }) =>
+                      `mobile-nav-sublink ${isActive ? "active" : ""}`.trim()
+                    }
+                    onClick={onNavigate}
+                    to={child.to}
+                  >
+                    <strong>{child.label}</strong>
+                    <span>{child.description}</span>
+                  </NavLink>
+                ))}
+              </div>
+            </div>
+          );
+        }
 
         return (
           <div
@@ -75,7 +135,7 @@ function NavigationMenu({ nav }) {
               <span className="nav-menu-trigger-text">{item.label}</span>
               {displayMark ? (
                 <span className="nav-menu-trigger-mark" aria-hidden="true">
-                  {item.label === "PIE" ? "\u03C0" : displayMark}
+                  {displayMark}
                 </span>
               ) : null}
             </button>
@@ -84,10 +144,7 @@ function NavigationMenu({ nav }) {
                 <p className="panel-label">
                   {item.label}
                   {displayMark ? (
-                    <span className="nav-menu-panel-mark">
-                      {" "}
-                      {item.label === "PIE" ? "\u03C0" : displayMark}
-                    </span>
+                    <span className="nav-menu-panel-mark"> {displayMark}</span>
                   ) : null}
                 </p>
                 <p>{item.description}</p>
@@ -99,6 +156,7 @@ function NavigationMenu({ nav }) {
                     className={({ isActive }) =>
                       `nav-submenu-link ${isActive ? "active" : ""}`.trim()
                     }
+                    onClick={onNavigate}
                     to={child.to}
                   >
                     <strong>{child.label}</strong>
@@ -115,6 +173,13 @@ function NavigationMenu({ nav }) {
 }
 
 export function AppShell({ theme = "optic", nav, children }) {
+  const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const footerTitle =
     theme === "optic"
       ? "Reusable perception infrastructure for autonomous machines."
@@ -188,15 +253,42 @@ export function AppShell({ theme = "optic", nav, children }) {
               <strong>{theme === "optic" ? "OPTIC" : "EMBODIED LABS"}</strong>
               <span>
                 {theme === "optic"
-                  ? "Perception Infrastructure"
+                  ? "AI Perception Infrastructure"
                   : "Frontier Lab for Physical AI"}
               </span>
             </span>
           </NavLink>
 
-          <NavigationMenu nav={nav} />
+          <div className="site-header-nav">
+            <NavigationMenu nav={nav} />
+          </div>
 
-          <BrandSwitch />
+          <div className="site-header-actions">
+            <BrandSwitch className="brand-switch-desktop" />
+            <button
+              className={`mobile-menu-button ${mobileMenuOpen ? "open" : ""}`}
+              type="button"
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              onClick={() => setMobileMenuOpen((current) => !current)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        <div className={`mobile-nav-shell ${mobileMenuOpen ? "open" : ""}`}>
+          <NavigationMenu
+            mobile
+            nav={nav}
+            onNavigate={() => setMobileMenuOpen(false)}
+          />
+          <BrandSwitch
+            className="brand-switch-mobile"
+            onNavigate={() => setMobileMenuOpen(false)}
+          />
         </div>
       </header>
 
