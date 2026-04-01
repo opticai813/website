@@ -1,14 +1,15 @@
 # Optic Capability Statement
 
 ## Company Definition
-Optic is a hardware-agnostic perception infrastructure layer that fuses heterogeneous sensing inputs, performs real-time edge inference, detects anomalies, and exposes interoperable scene intelligence for autonomous systems.
+Optic is a perception infrastructure company developing edge-deployable, hardware-agnostic software for multi-modal sensing, scene understanding, anomaly intelligence, and machine-ready output generation. Optic supports defense, robotics, and industrial platforms that require real-time understanding of dynamic environments using heterogeneous sensor inputs.
 
 ## Core Capabilities
 - Multi-modal sensor fusion
-- Real-time perception and localization
-- Anomaly intelligence
-- Edge runtime deployment
-- APIs and SDK surfaces
+- Edge AI deployment
+- Anomaly detection
+- Scene graph and object relation modeling
+- Runtime orchestration
+- API and SDK integration for autonomous systems
 
 ## Best-Fit Missions
 - Defense perimeter intelligence

@@ -1,15 +1,17 @@
 # Embodied Labs Capability Statement
 
 ## Company Definition
-Embodied Labs is the frontier lab and transfer engine around Optic. It prototypes new sensing, autonomy, and evaluation concepts, then packages the strongest reusable infrastructure for transfer into Optic.
+Embodied Labs is a frontier research and prototyping lab focused on embodied perception, multi-modal sensing, adaptive inference, evaluation systems, and experimental autonomy architectures. The lab develops advanced technical concepts, prototypes, datasets, and validation frameworks that inform future platform capabilities and mission systems.
 
-## Core Functions
-- Frontier experimentation
-- Evaluation harnesses and embodied testing
-- Research partnerships and non-dilutive pathways
-- Transfer packages for productization inside Optic
+## Core Competencies
+- Frontier perception R&D
+- Experimental system prototyping
+- Evaluation harness design
+- Multi-modal scenario generation
+- Simulation and synthetic data workflows
+- Technical validation and transition support
 
 ## Boundary Conditions
-- Not a replacement for Optic
-- Not the downstream decision layer
-- Maintains clear separation from Depth
+- Embodied Labs is the invention and experimentation layer
+- Optic remains the deployable infrastructure platform
+- The lab supports validation and transfer without becoming a shadow product company

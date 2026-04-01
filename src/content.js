@@ -1,75 +1,278 @@
 export const opticNav = [
-  { label: "Home", to: "/" },
-  { label: "Platform", to: "/optic/platform" },
-  { label: "Developers", to: "/optic/developers" },
-  { label: "Government", to: "/optic/government" },
-  { label: "Investor", to: "/optic/investor" },
-  { label: "Mockups", to: "/optic/mockups" },
-  { label: "Documents", to: "/optic/documents" },
+  { label: "Overview", to: "/" },
+  {
+    label: "PIE",
+    description: "Perception Infrastructure Engine",
+    mark: "π",
+    items: [
+      {
+        label: "Stack",
+        to: "/optic/platform",
+        description: "Architecture, ingest, fusion, anomaly intelligence, and output schemas.",
+      },
+      {
+        label: "Runtime",
+        to: "/optic/developers",
+        description: "Edge orchestration, SDK surfaces, and deployment behavior.",
+      },
+      {
+        label: "Mission Systems",
+        to: "/optic/government",
+        description: "Defense, government, and mission-insert positioning.",
+      },
+      {
+        label: "Interfaces",
+        to: "/optic/mockups",
+        description: "Product surfaces, operator views, and system interaction layers.",
+      },
+    ],
+  },
+  {
+    label: "Company",
+    description: "Narrative, materials, and engagement",
+    items: [
+      {
+        label: "Briefing Room",
+        to: "/optic/documents",
+        description: "Decks, capability statements, and data room materials.",
+      },
+      {
+        label: "Trajectory",
+        to: "/optic/investor",
+        description: "Category story, market expansion, and platform growth path.",
+      },
+      {
+        label: "Request Demo",
+        to: "/optic/request-demo",
+        description: "Start a platform review or mission-focused demo conversation.",
+      },
+    ],
+  },
 ];
 
 export const embodiedNav = [
-  { label: "Embodied Labs", to: "/embodied-labs" },
-  { label: "Programs", to: "/embodied-labs/programs" },
-  { label: "Charter", to: "/embodied-labs/charter" },
-  { label: "Documents", to: "/embodied-labs/documents" },
+  { label: "Overview", to: "/embodied-labs" },
+  {
+    label: "Frontier Lab",
+    description: "Research, validation, and transfer",
+    items: [
+      {
+        label: "Research Themes",
+        to: "/embodied-labs/programs",
+        description: "Frontier perception R&D, adaptive sensing, and evaluation systems.",
+      },
+      {
+        label: "Transfer Model",
+        to: "/embodied-labs/charter",
+        description: "How Embodied Labs moves validated breakthroughs into deployable systems.",
+      },
+    ],
+  },
+  {
+    label: "Company",
+    description: "Materials and collaboration",
+    items: [
+      {
+        label: "Briefing Room",
+        to: "/embodied-labs/documents",
+        description: "Capability statements and supporting documents.",
+      },
+      {
+        label: "Partner With the Lab",
+        to: "/embodied-labs/partner",
+        description: "Explore frontier research, technical validation, and prototype collaboration.",
+      },
+    ],
+  },
 ];
 
 export const opticArchitecture = [
   {
-    title: "Sensor Ingestion",
-    body: "Synchronize camera, LiDAR, EO/IR, radar, acoustic, and IMU streams into one machine-readable timeline.",
+    title: "Sensor ingest layer",
+    body: "Ingest camera, LiDAR, EO/IR, acoustic, radar, IMU, and other sensor streams into one operational pipeline.",
   },
   {
-    title: "Fusion Engine",
-    body: "Align heterogeneous sensing into spatially coherent scene context instead of isolated detections.",
+    title: "Synchronization and normalization",
+    body: "Align timestamps, normalize formats, and prepare heterogeneous data streams for cross-modal understanding.",
   },
   {
-    title: "Perception Engine",
-    body: "Detect, classify, track, and localize objects with reusable scene outputs for downstream systems.",
+    title: "Fusion engine",
+    body: "Perform temporal and spatial fusion across modalities so sensors become one coherent scene rather than isolated feeds.",
   },
   {
-    title: "Anomaly Intelligence",
-    body: "Flag unknown objects, abnormal behaviors, and off-nominal signatures without waiting for perfect labels.",
+    title: "Perception engine",
+    body: "Detect, classify, track, and localize objects, trajectories, scene relations, and environment state.",
   },
   {
-    title: "Edge Runtime",
-    body: "Run perception close to the machine on embedded compute where latency, resilience, and safety matter.",
+    title: "Anomaly intelligence",
+    body: "Detect abnormal objects, behaviors, signatures, and off-nominal conditions without waiting for perfect labels.",
   },
   {
-    title: "APIs + SDK",
-    body: "Expose interoperable outputs for autonomy stacks, operators, government systems, and industrial platforms.",
+    title: "Edge runtime policy engine",
+    body: "Deploy low-latency inference, runtime optimization, and mission-aware policies directly on operational hardware.",
   },
+  {
+    title: "Output interface, API, and schema",
+    body: "Expose normalized scene and event outputs for autonomy stacks, command-and-control, monitoring systems, and SDK integrations.",
+  },
+];
+
+export const opticCoreCapabilities = [
+  {
+    title: "Multi-modal sensor fusion",
+    body: "Fuse camera, LiDAR, EO/IR, acoustic, radar, IMU, and other modalities into one operational perception layer.",
+  },
+  {
+    title: "Object detection and tracking",
+    body: "Understand entities, trajectories, relations, and environment context instead of emitting isolated detections.",
+  },
+  {
+    title: "Anomaly and threat detection",
+    body: "Surface unknown objects, abnormal behaviors, and mission-relevant signatures in real time.",
+  },
+  {
+    title: "Edge runtime orchestration",
+    body: "Run perception at low latency on drones, robots, and industrial systems where resilience matters.",
+  },
+  {
+    title: "Adaptive sensing and feedback",
+    body: "Support sensing strategies and runtime optimization that respond to environment state and mission mode.",
+  },
+  {
+    title: "Interoperable output schema and APIs",
+    body: "Generate normalized outputs that can feed autonomy, operators, command systems, or downstream intelligence layers.",
+  },
+];
+
+export const opticOperationalFlow = [
+  {
+    title: "Ingest",
+    body: "Camera, LiDAR, EO/IR, acoustic, radar, IMU, and other sensor inputs.",
+  },
+  {
+    title: "Fuse",
+    body: "Temporal and spatial alignment across heterogeneous data streams.",
+  },
+  {
+    title: "Understand",
+    body: "Objects, trajectories, scene relations, anomalies, and environment state.",
+  },
+  {
+    title: "Act",
+    body: "Generate alerts, directives, runtime policies, and machine-consumable outputs.",
+  },
+];
+
+export const opticCategoryComparisons = [
+  {
+    title: "Not just computer vision",
+    body: "Computer vision detects. Optic perceives across modalities and produces machine-ready scene understanding.",
+  },
+  {
+    title: "Not just world models",
+    body: "World models are often simulation- or policy-oriented. Optic is real-time perception infrastructure for operational systems.",
+  },
+  {
+    title: "Not just a vertical defense product",
+    body: "Optic is a reusable platform layer that can be embedded across missions, programs, and sectors.",
+  },
+];
+
+export const opticProductOutputs = [
+  "Object identity",
+  "Confidence",
+  "3D position",
+  "Velocity",
+  "Relation to other objects",
+  "Anomaly score",
+  "Provenance by sensor source",
+  "Runtime directives",
+  "Operator or autonomy alerts",
 ];
 
 export const opticWedges = [
   {
     title: "Defense",
-    subtitle: "Autonomous perimeter intelligence",
+    subtitle: "Perimeter intelligence and threat-aware edge perception",
     bullets: [
-      "Counter-UAS and force protection workflows",
-      "Base, port, facility, and mobile ISR cueing",
-      "Edge-deployed anomaly intelligence in degraded environments",
+      "Perimeter intelligence, counter-UAS cueing, and autonomous surveillance",
+      "Sensor fusion for threat detection and contested-environment perception",
+      "Edge deployment for defense teams that need low-latency scene awareness",
     ],
   },
   {
     title: "Industrial Inspection",
-    subtitle: "Persistent machine perception for critical infrastructure",
+    subtitle: "Persistent machine perception for industrial autonomy",
     bullets: [
-      "Leak, defect, and off-nominal activity detection",
-      "Refineries, plants, utilities, pipelines, and asset corridors",
-      "Lower human inspection burden with machine-speed awareness",
+      "Inspection robots, defect detection, and facility monitoring",
+      "Anomaly detection and predictive maintenance workflows",
+      "Machine-speed awareness for plants, corridors, utilities, and infrastructure",
     ],
   },
   {
     title: "Robotics",
-    subtitle: "Reusable perception runtime for autonomous machines",
+    subtitle: "Runtime perception services for fleets and autonomy stacks",
     bullets: [
-      "Drones, rovers, warehouse platforms, and inspection bots",
-      "SDK-ready outputs instead of one-off vision pipelines",
-      "Fleet-ready scene telemetry and event streams",
+      "Navigation support, object and scene understanding, and multi-robot perception",
+      "Reusable services instead of custom point solutions per platform",
+      "Fleet-ready scene telemetry, alerts, and runtime interfaces",
     ],
   },
+];
+
+export const opticMissionStories = [
+  {
+    label: "Autonomous perimeter intelligence",
+    title: "Track aerial activity and classify anomalies before the operator gets buried.",
+    body: "Fuse drone, EO/IR, LiDAR, and radar-adjacent feeds into one operational scene so platforms can patrol, localize, and escalate with machine-speed context.",
+    video: "/media/armed-cobalt-drone.webm",
+    chips: ["Drone ISR", "Perimeter patrol", "Anomaly alerts"],
+    overlay: "optic",
+    readouts: ["Track confidence 96.4%", "Objects tracked 14", "Sensor state fused"],
+  },
+  {
+    label: "Counter-UAS and force protection",
+    title: "Turn disjointed sensing into detect-track-classify workflows for defense teams.",
+    body: "Optic helps bridge sensing hardware and mission systems with edge-deployed fusion, track persistence, and operator-grade scene outputs across contested environments.",
+    video: "/media/counter-uas-training.webm",
+    chips: ["Counter-UAS", "Force protection", "Operator cueing"],
+    overlay: "defense",
+    readouts: ["Threat queue 03", "Operator handoff live", "Alert latency <100 ms"],
+  },
+  {
+    label: "Active drone perception",
+    title: "Layer tracks, boxes, and fused telemetry directly onto live aerial video.",
+    body: "Optic moves perception onto the aircraft so teams see live scene understanding instead of raw feed: active detections, range cues, anomaly confidence, and mission-ready overlays in real time.",
+    video: "/media/active-drone-perception.webm",
+    chips: ["Drone autonomy", "Computer vision overlays", "LiDAR-style telemetry"],
+    overlay: "perception",
+    readouts: ["Altitude 245 ft", "Range gate 1.2 km", "Scene confidence 97.1%"],
+  },
+];
+
+export const opticProofPoints = [
+  {
+    title: "Built for the edge",
+    body: "Optic is designed for low-latency deployment on operational hardware, not only in cloud or lab environments.",
+  },
+  {
+    title: "Multi-modal by design",
+    body: "Optic is built to fuse heterogeneous sensors rather than treating each modality as an isolated stack.",
+  },
+  {
+    title: "Infrastructure, not a point solution",
+    body: "Optic is reusable across platforms, missions, and industries rather than tied to a single vertical application.",
+  },
+  {
+    title: "Interoperable outputs",
+    body: "Optic produces normalized scene and event representations that can feed autonomy, command-and-control, monitoring systems, or downstream intelligence layers.",
+  },
+];
+
+export const opticMediaCredits = [
+  "Armed Cobalt 110 G-VTOL Drone / Rhk111 / CC BY-SA 4.0 via Wikimedia Commons",
+  "1st Armored Division Soldiers Conduct Counter UAS Training / Staff Sgt. Felix Mena / U.S. Army public domain via Wikimedia Commons",
+  "A Drone with a Brain / U.S. Department of Defense / public domain via Wikimedia Commons",
 ];
 
 export const governmentThemes = [
@@ -96,10 +299,48 @@ export const investorPillars = [
 ];
 
 export const embodiedPillars = [
-  "Embodied Labs is the frontier lab and transfer engine for Optic, not the product company itself.",
-  "Its role is to prototype, evaluate, and de-risk new sensing and autonomy concepts before platformization.",
-  "It generates technical lead, applied research credibility, and government/non-dilutive pathways.",
-  "It should remain clearly distinct from Optic and from any separate downstream decision infrastructure.",
+  "Optic is the product platform: deployable infrastructure, edge runtime, APIs and SDKs, and the commercial, defense, and government deployment path.",
+  "Embodied Labs is the frontier lab: invention, experimentation, evaluation, validation, and prototype generation upstream of productization.",
+  "Embodied Labs should de-risk novel sensing, fusion, evaluation, and embodied intelligence concepts before they become reusable Optic capabilities.",
+  "Keeping the boundary crisp allows the lab to explore aggressively while the platform company stays deployment-focused and category-defining.",
+];
+
+export const embodiedFunctions = [
+  {
+    title: "Research",
+    body: "Novel architectures in perception, multi-modal understanding, anomaly intelligence, and embodied machine interaction.",
+  },
+  {
+    title: "Prototype",
+    body: "Experimental systems, simulation environments, adaptive sensing loops, and high-risk technical concepts.",
+  },
+  {
+    title: "Validate",
+    body: "Benchmarking, evaluation harnesses, synthetic data generation, scenario testing, and transition-readiness studies.",
+  },
+  {
+    title: "Transfer",
+    body: "Move validated technical breakthroughs into deployable platform layers such as Optic or into partner systems.",
+  },
+];
+
+export const embodiedResearchThemes = [
+  "Multi-modal embodied perception",
+  "Adaptive sensor orchestration",
+  "Scene relation and behavior modeling",
+  "Anomaly intelligence in dynamic environments",
+  "Simulation-to-real perception systems",
+  "Evaluation frameworks for autonomous sensing",
+  "Data generation and synthetic scenario design",
+  "Perception for defense, robotics, and industrial autonomy",
+];
+
+export const embodiedPipeline = [
+  "Frontier research question",
+  "Experimental prototype",
+  "Evaluation and benchmarking",
+  "Technical validation",
+  "Transfer to deployable platform or partner system",
 ];
 
 export const documentCards = [

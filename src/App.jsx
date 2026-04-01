@@ -6,6 +6,7 @@ import DocumentsPage from "./pages/DocumentsPage";
 import {
   EmbodiedCharterPage,
   EmbodiedHomePage,
+  EmbodiedPartnerPage,
   EmbodiedProgramsPage,
 } from "./pages/EmbodiedPages";
 import {
@@ -15,6 +16,7 @@ import {
   OpticInvestorPage,
   OpticMockupsPage,
   OpticPlatformPage,
+  OpticRequestDemoPage,
 } from "./pages/OpticPages";
 
 export default function App() {
@@ -31,11 +33,13 @@ export default function App() {
         <Route path="/optic/investor" element={<OpticInvestorPage />} />
         <Route path="/optic/mockups" element={<OpticMockupsPage />} />
         <Route path="/optic/documents" element={<DocumentsPage />} />
+        <Route path="/optic/request-demo" element={<OpticRequestDemoPage />} />
         <Route path="/decks/:slug" element={<DeckPage />} />
         <Route path="/embodied-labs" element={<EmbodiedHomePage />} />
         <Route path="/embodied-labs/programs" element={<EmbodiedProgramsPage />} />
         <Route path="/embodied-labs/charter" element={<EmbodiedCharterPage />} />
         <Route path="/embodied-labs/documents" element={<DocumentsPage />} />
+        <Route path="/embodied-labs/partner" element={<EmbodiedPartnerPage />} />
         <Route path="/documents" element={<DocumentsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

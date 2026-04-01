@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Card, SectionHeading } from "../components/Layout";
 import { documentCards } from "../content";
 
 export default function DocumentsPage() {
+  const location = useLocation();
+  const embodied = location.pathname.startsWith("/embodied-labs");
+
   return (
     <>
       <section className="section page-hero-compact">
         <div className="section-inner split-copy">
           <div>
             <SectionHeading
-              eyebrow="Documents"
-              title="Decks, capability statements, and data room building blocks."
+              eyebrow={embodied ? "Embodied Labs / Briefing Room" : "Optic / Briefing Room"}
+              title="Decks, capability statements, and briefing materials."
             >
               <p>
                 This hub now supports both source documents and slide-ready

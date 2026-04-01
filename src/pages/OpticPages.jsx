@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import PerceptionCanvas from "../components/PerceptionCanvas";
 import { Card, PageHero, SectionHeading } from "../components/Layout";
@@ -6,6 +7,13 @@ import {
   investorPillars,
   mockupFrames,
   opticArchitecture,
+  opticCategoryComparisons,
+  opticCoreCapabilities,
+  opticMediaCredits,
+  opticMissionStories,
+  opticOperationalFlow,
+  opticProofPoints,
+  opticProductOutputs,
   opticWedges,
 } from "../content";
 
@@ -115,36 +123,152 @@ function HeroStage() {
   );
 }
 
+function MissionVideoBand({ story, index }) {
+  const isReversed = index % 2 === 1;
+  const bandRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const element = bandRef.current;
+      if (!element) return;
+
+      const rect = element.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const total = Math.max(1, rect.height - viewportHeight);
+      const travelled = clamp(-rect.top, 0, total);
+      setProgress(travelled / total);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
+
+  const videoScale = 1 + progress * 0.08;
+  const copyOpacity = clamp(progress < 0.12 ? progress / 0.12 : progress > 0.92 ? (1 - progress) / 0.08 : 1, 0, 1);
+  const copyTranslate = 30 - progress * 30;
+
+  return (
+    <article className={`mission-band mission-band-${story.overlay}`} ref={bandRef}>
+      <div className="mission-band-stage">
+        <div className="mission-band-media">
+        <video
+          className="mission-band-video"
+          src={story.video}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/assets/mission-control.svg"
+          style={{ transform: `scale(${videoScale})` }}
+        />
+        <div className={`mission-band-overlay mission-band-overlay-${story.overlay}`}></div>
+        <div className="mission-band-grid" aria-hidden="true"></div>
+        <div className="mission-band-corners" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className="mission-band-target mission-band-target-primary" aria-hidden="true"></div>
+        <div className="mission-band-target mission-band-target-secondary" aria-hidden="true"></div>
+        <div className="mission-band-sweep" aria-hidden="true"></div>
+        <div className="mission-band-crosshair" aria-hidden="true"></div>
+        <div className="mission-band-range" aria-hidden="true">
+          <span>12m</span>
+          <span>87m</span>
+          <span>142m</span>
+        </div>
+        <div className="mission-band-hud">
+          <span>{story.label}</span>
+          <strong>OPTIC / ACTIVE</strong>
+        </div>
+        </div>
+
+        <div className={`mission-band-inner ${isReversed ? "is-reversed" : ""}`}>
+          <div
+            className="mission-band-copy"
+            style={{
+              opacity: copyOpacity,
+              transform: `translate3d(0, ${copyTranslate}px, 0)`,
+            }}
+          >
+            <p className="panel-label">{story.label}</p>
+            <h3>{story.title}</h3>
+            <p>{story.body}</p>
+            <div className="mission-chip-row">
+              {story.chips.map((chip) => (
+                <span className="mission-chip" key={chip}>
+                  {chip}
+                </span>
+              ))}
+            </div>
+            <div className="mission-readout-grid">
+              {story.readouts.map((readout) => (
+                <span className="mission-readout" key={readout}>
+                  {readout}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
 export function OpticHomePage() {
   return (
     <>
       <PageHero
+        className="optic-home-hero"
         eyebrow="Optic.ai / Home"
-        title="Perception Infrastructure for Physical AI"
-        body="Optic turns sensor-rich machines into perception-capable systems with real-time fusion, anomaly intelligence, and edge deployment for defense, industrial inspection, and robotics."
+        title="Perception Engine for Autonomony"
+        body="Optic enables ingested data from drones, robots, and industrial systems to see, understand, and respond to the physical world in real time."
+        backgroundVideo={{
+          src: "/media/counter-uas-training.webm",
+          poster: "/assets/mission-control.svg",
+        }}
         actions={
           <>
-            <Link className="button button-primary" to="/optic/investor">
-              View Investor Story
+            <Link className="button button-primary" to="/optic/request-demo">
+              Request Demo
             </Link>
-            <Link className="button button-secondary" to="/optic/government">
-              Government Readiness
+            <Link className="button button-secondary" to="/optic/developers">
+              Get Developer Access
             </Link>
           </>
         }
         side={<HeroStage />}
       />
 
-      <section className="section">
+      <section className="section optic-home-overlap optic-home-overlap-first">
         <div className="section-inner">
           <SectionHeading
             eyebrow="Why Optic"
             title="Sensor-rich systems are still perception-poor."
           >
             <p>
-              Most autonomous programs still stitch together fragmented
-              pipelines, cloud dependence, and single-use models. Optic is the
-              missing operating layer between raw sensing and machine action.
+              Autonomous systems are surrounded by data but constrained by
+              fragmented perception. Every robotics company, defense integrator,
+              and industrial platform team is forced to stitch together custom
+              pipelines for sensor ingest, synchronization, fusion, detection,
+              anomaly handling, and runtime deployment.
+            </p>
+            <p>
+              That approach is slow, expensive, difficult to scale, and poorly
+              suited to real-world autonomy.
             </p>
           </SectionHeading>
 
@@ -178,12 +302,105 @@ export function OpticHomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section optic-home-overlap">
         <div className="section-inner">
           <SectionHeading
-            eyebrow="Wedges"
-            title="One infrastructure layer. Multiple operational wedges."
-          />
+            eyebrow="Solution"
+            title="PIE is the missing perception layer."
+          >
+            <p>
+              Optic transforms raw sensor streams into machine-ready scene
+              intelligence through PIE, its Perception Infrastructure Engine.
+              PIE combines synchronized ingest, cross-modal fusion,
+              edge-deployed inference, anomaly intelligence, and normalized
+              output schemas into a single reusable platform.
+            </p>
+          </SectionHeading>
+
+          <div className="card-grid three-up">
+            {opticCoreCapabilities.map((capability) => (
+              <Card key={capability.title}>
+                <h3>{capability.title}</h3>
+                <p>{capability.body}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section operations-section optic-home-overlap">
+        <div className="section-inner operations-intro">
+          <SectionHeading
+            eyebrow="Operational Use Cases"
+            title="A full-width mission layer that shows Optic operating in the field."
+          >
+            <p>
+              The middle of the homepage should feel less like a stack of cards
+              and more like an operational sequence: aerial patrol, counter-UAS
+              response, and live drone perception with overlays that make the
+              technology legible in action.
+            </p>
+          </SectionHeading>
+
+          <div className="operations-proof-grid">
+            {opticProofPoints.map((point) => (
+              <Card className="operations-proof-card" key={point.title}>
+                <h3>{point.title}</h3>
+                <p>{point.body}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <div className="operations-bands">
+          {opticMissionStories.map((story, index) => (
+            <MissionVideoBand key={story.title} story={story} index={index} />
+          ))}
+        </div>
+
+        <div className="section-inner media-credit-row">
+          <p className="media-credit">Footage credits: {opticMediaCredits.join(" | ")}</p>
+        </div>
+      </section>
+
+      <section className="section signal-section optic-home-overlap">
+        <div className="section-inner">
+          <SectionHeading
+            eyebrow="What Optic Does"
+            title="Ingest, fuse, understand, and act."
+          >
+            <p>
+              Optic is not a world model, not a dashboard, and not a one-off
+              computer vision stack. It is the operating layer that allows
+              sensor-rich machines to perceive dynamic environments in real
+              time and act on that understanding.
+            </p>
+          </SectionHeading>
+
+          <div className="card-grid four-up">
+            {opticOperationalFlow.map((step) => (
+              <Card key={step.title}>
+                <p className="panel-label">{step.title}</p>
+                <p>{step.body}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section optic-home-overlap">
+        <div className="section-inner">
+          <SectionHeading
+            eyebrow="Deployments"
+            title="Reusable across defense, industrial, and robotics systems."
+          >
+            <p>
+              Rather than selling a single vertical application, Optic provides
+              reusable perception infrastructure that can be embedded across
+              defense, industrial, and robotics systems.
+            </p>
+          </SectionHeading>
+
           <div className="card-grid three-up">
             {opticWedges.map((wedge) => (
               <Card key={wedge.title}>
@@ -200,32 +417,57 @@ export function OpticHomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section optic-home-overlap">
         <div className="section-inner">
           <SectionHeading
-            eyebrow="Visual Layer"
-            title="A more cohesive marketing and product surface."
+            eyebrow="Product Outputs"
+            title="Optic turns sensor data into actionable scene intelligence."
           >
             <p>
-              Local signal-art and dashboard imagery now reinforce the site’s
-              category claim: Optic is infrastructure, not a generic AI landing
-              page.
+              Outputs can feed autonomy stacks, operator systems,
+              command-and-control, monitoring platforms, or downstream
+              intelligence layers through normalized schemas, APIs, and runtime
+              interfaces.
             </p>
           </SectionHeading>
 
           <div className="card-grid two-up">
+            <Card>
+              <p className="panel-label">Machine-Ready Outputs</p>
+              <ul>
+                {opticProductOutputs.map((output) => (
+                  <li key={output}>{output}</li>
+                ))}
+              </ul>
+            </Card>
+            <Card>
+              <p className="panel-label">Category Position</p>
+              <ul>
+                {opticCategoryComparisons.map((item) => (
+                  <li key={item.title}>
+                    <strong>{item.title}:</strong> {item.body}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+
+          <div className="card-grid two-up section-spacer-top">
             <VisualPanel
               src="/assets/optic-network.svg"
               label="Platform Visual"
-              title="Perception network and architecture art"
-              body="A generated system map that visually reinforces Optic as a reusable infrastructure layer rather than a single feature or model."
+              title="The Optic Perception Stack"
+              body="A reusable infrastructure layer for synchronized ingest, fusion, inference, anomaly intelligence, edge policy, and interoperable outputs."
             />
-            <VisualPanel
-              src="/assets/mission-control.svg"
-              label="Product Visual"
-              title="Mission-control dashboard art"
-              body="A local interface illustration that helps the product, mockup, and deck pages feel more like a coherent software platform."
-            />
+            <Card>
+              <p className="panel-label">Vision</p>
+              <h3>The operating layer for machines that need to perceive the world.</h3>
+              <p>
+                As machines become more autonomous, perception becomes
+                foundational infrastructure. Optic is building that layer:
+                reusable, edge-deployable, multi-modal, and interoperable.
+              </p>
+            </Card>
           </div>
         </div>
       </section>
@@ -239,16 +481,17 @@ export function OpticPlatformPage() {
       <section className="section page-hero-compact">
         <div className="section-inner architecture-grid">
           <div>
-            <SectionHeading
-              eyebrow="Optic / Platform"
-              title="A six-layer stack built for real-world machine perception."
-            >
-              <p>
-                Optic is not a world model and not a narrow point product. It
-                is the reusable perception infrastructure layer between sensors
-                and downstream autonomy or operator systems.
-              </p>
-            </SectionHeading>
+          <SectionHeading
+            eyebrow="PIE / Stack"
+            title="PIE: Optic's Perception Infrastructure Engine"
+          >
+            <p>
+              At its core, Optic ingests multi-modal sensor streams,
+              synchronizes and fuses them, performs object and scene-level
+              inference, detects anomalies, and exposes normalized outputs
+              through APIs, SDKs, and runtime interfaces.
+            </p>
+          </SectionHeading>
 
             <div className="stack-list">
               {opticArchitecture.map((item, index) => (
@@ -296,25 +539,25 @@ export function OpticPlatformPage() {
       <section className="section">
         <div className="section-inner">
           <SectionHeading
-            eyebrow="Positioning"
-            title="Optic is the perception layer. Depth remains downstream."
+            eyebrow="Why Optic Is Different"
+            title="Infrastructure for operational perception, not another isolated stack."
           >
             <p>
-              Optic should own perception infrastructure: fusion, localization,
-              anomaly awareness, and scene outputs. Embodied Labs explores the
-              frontier; Depth, if pursued, remains separate downstream
-              consequence and decision infrastructure.
+              Optic is reusable across platforms, missions, and sectors because
+              it is built as infrastructure: multi-modal by design, deployable
+              at the edge, and able to generate interoperable scene and event
+              outputs for real-world systems.
             </p>
           </SectionHeading>
 
           <div className="compare-grid">
             <Card className="muted-card">
-              <h3>World Models</h3>
-              <p>Good for simulation and internal representations.</p>
+              <h3>Computer Vision</h3>
+              <p>Computer vision detects. Optic perceives across modalities.</p>
               <ul>
-                <li>Often centralized and compute-heavy</li>
-                <li>Not optimized for dirty edge sensing</li>
-                <li>Weak as deployable perception middleware</li>
+                <li>Single-modality pipelines are often brittle</li>
+                <li>Detections alone are not a system of record for reality</li>
+                <li>Limited scene understanding and runtime orchestration</li>
               </ul>
             </Card>
             <Card className="featured-card">
@@ -322,17 +565,17 @@ export function OpticPlatformPage() {
               <p>Real-time, edge-deployable perception infrastructure.</p>
               <ul>
                 <li>Fusion across heterogeneous sensing</li>
-                <li>Anomaly-aware scene intelligence</li>
-                <li>Reusable APIs and runtime layer</li>
+                <li>Scene understanding, anomaly intelligence, and runtime policy</li>
+                <li>Reusable APIs, schemas, and deployable software surfaces</li>
               </ul>
             </Card>
             <Card className="muted-card">
-              <h3>Vertical Defense Products</h3>
-              <p>Strong domain products, but usually closed and narrow.</p>
+              <h3>World Models and Vertical Products</h3>
+              <p>Important categories, but not what Optic is building.</p>
               <ul>
-                <li>Tied to specific mission systems</li>
-                <li>Less reusable across industries</li>
-                <li>Limited ecosystem potential</li>
+                <li>World models are often simulation- or policy-oriented</li>
+                <li>Vertical defense products are usually closed and mission-specific</li>
+                <li>Optic sits underneath as a reusable platform layer</li>
               </ul>
             </Card>
           </div>
@@ -348,16 +591,16 @@ export function OpticDevelopersPage() {
       <section className="section page-hero-compact">
         <div className="section-inner developer-grid">
           <div>
-            <SectionHeading
-              eyebrow="Optic / Developers"
-              title="Build on the perception layer instead of rebuilding it."
-            >
-              <p>
-                The developer surface should feel more like mission-control
-                infrastructure than a generic AI API: streams, scene outputs,
-                anomaly events, and hardware-aware runtime behavior.
-              </p>
-            </SectionHeading>
+          <SectionHeading
+            eyebrow="PIE / Runtime"
+            title="Build on PIE instead of rebuilding perception from scratch."
+          >
+            <p>
+              Build on the Optic platform instead of rebuilding ingest,
+              synchronization, fusion, anomaly handling, and runtime logic for
+              each new machine or deployment.
+            </p>
+          </SectionHeading>
 
             <div className="terminal-card">
               <div className="terminal-header">
@@ -366,41 +609,36 @@ export function OpticDevelopersPage() {
                 <span></span>
               </div>
               <pre>
-                <code>{`import optic
-
-frame = camera.capture()
-lidar = lidar.scan()
-
-scene = optic.fusion.combine(frame, lidar)
+                <code>{`scene = optic.fusion.combine(camera, lidar, thermal)
 objects = optic.vision.detect(scene)
 alerts = optic.anomaly.check(scene)
-
-print(objects[0].type, alerts.status)`}</code>
+runtime = optic.runtime.optimize(scene, mission_mode="perimeter")`}</code>
               </pre>
             </div>
           </div>
 
           <div className="developer-points">
+            <Card>
+              <h3>Interoperable output schema</h3>
+              <p>
+                Normalized scene and event outputs can feed autonomy stacks,
+                operator experiences, command systems, or downstream intelligence
+                layers.
+              </p>
+            </Card>
+            <Card>
+              <h3>Runtime orchestration</h3>
+              <p>
+                Optimize scene understanding and mission behavior directly on
+                drones, robots, and industrial systems where latency matters.
+              </p>
+            </Card>
             <VisualPanel
               src="/assets/mission-control.svg"
               label="UI Direction"
               title="A developer-facing mission control interface"
               body="Perception streams, scene graph, telemetry, simulation, and deployment surfaces all reinforce the platform posture."
             />
-            <Card>
-              <h3>Mission-ready APIs</h3>
-              <p>
-                Scene, object, anomaly, and streaming endpoints for autonomy,
-                operator workflows, and external systems.
-              </p>
-            </Card>
-            <Card>
-              <h3>Hardware-aware runtime</h3>
-              <p>
-                Designed for drones, inspection robots, industrial systems, and
-                other embedded edge deployments.
-              </p>
-            </Card>
           </div>
         </div>
       </section>
@@ -414,10 +652,10 @@ export function OpticGovernmentPage() {
       <section className="section page-hero-compact">
         <div className="section-inner split-copy">
           <div>
-            <SectionHeading
-              eyebrow="Optic / Government"
-              title="A reusable government narrative built around perception infrastructure."
-            >
+          <SectionHeading
+            eyebrow="PIE / Mission Systems"
+            title="A reusable government narrative built around perception infrastructure."
+          >
               <p>
                 The strongest government position for Optic is as a modular
                 perception layer that ingests heterogeneous sensing, performs
@@ -495,9 +733,9 @@ export function OpticInvestorPage() {
       <section className="section page-hero-compact">
         <div className="section-inner split-copy">
           <div>
-            <SectionHeading
-              eyebrow="Optic / Investor"
-              title="A multi-billion-dollar trajectory built from wedge deployments to category ownership."
+          <SectionHeading
+            eyebrow="Optic / Trajectory"
+            title="A multi-billion-dollar trajectory built from wedge deployments to category ownership."
             >
               <p>
                 The most credible story is not "better AI." It is runtime +
@@ -566,7 +804,7 @@ export function OpticMockupsPage() {
       <section className="section page-hero-compact">
         <div className="section-inner">
           <SectionHeading
-            eyebrow="Optic / Mockups"
+            eyebrow="PIE / Interfaces"
             title="A screenshot-ready mockup layer for site, product, and data room."
           >
             <p>
@@ -592,6 +830,39 @@ export function OpticMockupsPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export function OpticRequestDemoPage() {
+  return (
+    <>
+      <section className="section page-hero-compact">
+        <div className="section-inner split-copy">
+          <div>
+            <SectionHeading
+              eyebrow="Optic / Company"
+              title="Request a PIE platform demo."
+            >
+              <p>
+                Review Optic's Perception Infrastructure Engine across ingest,
+                fusion, anomaly intelligence, runtime orchestration, and
+                mission-system outputs for defense, robotics, and industrial
+                deployments.
+              </p>
+            </SectionHeading>
+          </div>
+            <Card className="callout-card">
+              <p className="panel-label">Demo Focus</p>
+              <h3>PIE in operational context.</h3>
+              <p>
+                Use this route as the handoff surface for platform reviews,
+              mission-aligned demos, and partner conversations until a dedicated
+              lead form is added.
+            </p>
+          </Card>
         </div>
       </section>
     </>
